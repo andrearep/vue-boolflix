@@ -12,8 +12,16 @@
 
 <body>
     <div id="root">
-        <input v-model="filmName" type="text" placeholder="Type a film name">
+        <input v-model="filmSearch" type="text" placeholder="Type a film name">
         <button @click="searchFilm">search</button>
+
+        <div v-for="film in films">
+
+            {{film.original_title}}
+            {{film.original_language}}
+            {{film.vote_average}}
+
+        </div>
     </div>
     <!-- axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

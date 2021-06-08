@@ -6,17 +6,18 @@ const app = new Vue({
 
     el: "#root",
     data: {
-        filmName: null,
-        filmNamePlus: null
+        filmSearch: null,
+        filmSearchPlus: null,
+        films: null
 
     },
     methods: {
         searchFilm: function serchFilm() {
-            this.filmNamePlus = replaceSpaceWPlus(this.filmName);
+            this.filmSearchPlus = replaceSpaceWPlus(this.filmSearch);
             axios
-                .get(`https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=${this.filmNamePlus}`)
+                .get(`https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=${this.filmSearchPlus}`)
                 .then(resp => {
-                    console.log(resp.data.results);
+                    this.films = resp.data.results
                 })
         }
     },
