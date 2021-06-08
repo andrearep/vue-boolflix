@@ -18,7 +18,7 @@
         <div v-for="film in films">
 
             {{film.original_title}}
-            {{film.original_language}}
+            <img :src="film.flag" width="30" alt="">
             {{film.vote_average}}
 
         </div>
