@@ -20,7 +20,11 @@ const app = new Vue({
                     this.films = resp.data.results
 
                     for (let i = 0; i < this.films.length; i++) {
-                        this.films[i].flag = `https://flagcdn.com/${this.films[i].original_language}.svg`
+                        if (this.films[i].original_language != 'en') {
+                            this.films[i].flag = `https://flagcdn.com/${this.films[i].original_language}.svg`
+                        } else if (this.films[i].original_language == 'en') {
+                            this.films[i].flag = `https://flagcdn.com/gb.svg`
+                        }
                     }
 
                 })
