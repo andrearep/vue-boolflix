@@ -53,8 +53,7 @@ const app = new Vue({
                 this.searchFilm();
                 this.searchSerie()
             }
-        }
-        )
+        })
     }
 
 
