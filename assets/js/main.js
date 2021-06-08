@@ -26,7 +26,7 @@ const app = new Vue({
     },
     methods: {
 
-        searchFilm: function serchFilm() {
+        searchFilm: function searchFilm() {
             this.filmSearchPlus = replaceSpaceWPlus(this.filmSearch);
             axios
                 .get(`https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=${this.filmSearchPlus}`)
@@ -36,7 +36,7 @@ const app = new Vue({
                 })
         },
 
-        searchSerie: function serchSerie() {
+        searchSerie: function searchSerie() {
             this.filmSearchPlus = replaceSpaceWPlus(this.filmSearch);
             axios
                 .get(`https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=${this.filmSearchPlus}`)
@@ -44,7 +44,18 @@ const app = new Vue({
                     this.series = resp.data.results
                     this.series = addFlag(this.series)
                 })
-        },
+        }
     },
+
+    mounted() {
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                this.searchFilm();
+                this.searchSerie()
+            }
+        }
+        )
+    }
+
 
 })
