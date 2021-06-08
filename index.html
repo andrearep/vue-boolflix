@@ -11,6 +11,10 @@
 </head>
 
 <body>
+    <div id="root">
+        <input v-model="filmName" type="text" placeholder="Type a film name">
+        <button @click="searchFilm">search</button>
+    </div>
     <!-- axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <!-- vue -->
