@@ -40,8 +40,6 @@ function transformKey(object, oldName, newName) {
     }
 }
 
-
-
 const app = new Vue({
 
     el: "#root",
@@ -50,6 +48,7 @@ const app = new Vue({
         searchSwitch: 0,
         filmSearch: null,
         filmSearchPlus: null,
+        stars: [],
         filmSerie: [
             /* film */
             {
@@ -98,7 +97,6 @@ const app = new Vue({
             } else {
                 this.noFilm = false
             }
-
         },
 
         switchOn: function switchOn() {
@@ -112,5 +110,7 @@ const app = new Vue({
                 this.search();
             }
         })
+
+
     }
 })

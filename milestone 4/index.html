@@ -56,15 +56,26 @@
                     <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
                     <div class="cards">
                         <div class="card" v-for="film in (element.movieList)">
-                            <img :src="film.pathImg" alt="">
-                            <!--   <span> {{film.original_title}}</span>
-                        <span> {{film.original_name}}</span>
-                        <img :src="film.flag" width="30" alt="">
-                        <span>{{film.vote_average}}</span> -->
+
+                            <img v-if="!onHover" :src="film.pathImg" alt="">
+                            <div class=retro>
+                                <span class="title">{{film.original_title}}</span>
+                                <div>
+                                    <span>Lingua originale</span>
+                                    <img :src="film.flag" width="30" alt="">
+                                </div>
+                                <span class="valutazione"> Valutazione Media: {{film.vote_average}}</span>
+                                <div class="stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
     </div>
     <!-- axios -->
@@ -76,3 +87,6 @@
 </body>
 
 </html>
+<i class="fas fa-star"></i>
+
+<i class="fas fa-star-half-alt"></i>

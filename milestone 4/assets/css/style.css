@@ -92,14 +92,44 @@ h2{
     
 }
 .card{
+    position: relative;
     width: 20%;
-    min-width: 200px;
+    height: 55vh;
     max-width: 400px;
     margin-bottom: 2rem;
+    min-height: 285px;
 }
 
 .card > img{
     width: 95%;
-    min-height: calc(width * 1.46);
-    
+    height: 100%;
+    min-height: 285px
+}
+
+.retro{
+    color: white;
+    height: 100%;
+    position: absolute;
+    top:0;
+    width: 100%;
+   opacity: 0;
+   background-color: #000000;
+   padding: 3rem;
+   display: flex;
+   flex-direction: column;
+}
+.retro:hover{
+    opacity: 1;
+}
+
+.card >img:hover{
+    opacity: 0;
+}
+.retro >*{
+    padding-bottom: 0.5rem;
+}
+.title{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
