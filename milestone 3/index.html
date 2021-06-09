@@ -19,7 +19,7 @@
             <div :id="element.name">
                 <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
                 <div v-for="film in (element.movieList)">
-                    <img src="" alt="">
+                    <img :src="film.pathImg" alt="">
                     <span> {{film.original_title}}</span>
                     <span> {{film.original_name}}</span>
                     <img :src="film.flag" width="30" alt="">

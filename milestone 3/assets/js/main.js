@@ -13,17 +13,31 @@ function addFlag(object) {
         } else {
             object[i].flag = `https://flagcdn.com/${object[i].original_language}.svg`
         }
-        console.log(object[i].flag);
+
     }
     return object;
 }
+function addPathImg(object) {
+    for (let i = 0; i < object.length; i++) {
+        object[i].pathImg = `https://image.tmdb.org/t/p/w342/${object[i].poster_path}`
+    }
+    return object
+}
+
+function transformKey(object, oldName, newName) {
+    for (let i = 0; i < object.length; i++) {
+        object[i][newName] = object[i][oldName];
+        delete object[i][oldName];
+        return object
+    }
+}
+
 
 
 const app = new Vue({
 
     el: "#root",
     data: {
-
         filmSearch: null,
         filmSerie: [
             /* film */
@@ -47,9 +61,18 @@ const app = new Vue({
                 axios
                     .get(`${element.url}${this.filmSearch}`)
                     .then(resp => {
+
                         element.movieList = (resp.data.results)
-                        element.movieList.flag = addFlag(element.movieList)
-                        console.log(`${element.url}${this.filmSearch}`);
+                        element.movieList = addFlag(element.movieList)
+
+                        /* cambiamo le chiavi che non corrispondono e che ci servono */
+                        if (element.name == "Serie TV") {
+                            element.movieList = transformKey(element.movieList, "name", "title")
+                            element.movieList = transformKey(element.movieList, "original_name", "original_title")
+                        }
+                        /* aggiunta elemento pathImg */
+                        element.movieList = addPathImg(element.movieList)
+                        console.log(element.movieList);
                     })
                     .catch(e => {
                         console.error(e);
