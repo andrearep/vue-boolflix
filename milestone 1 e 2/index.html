@@ -13,23 +13,17 @@
 <body>
     <div id="root">
         <input v-model="filmSearch" type="text" placeholder="Type a film name">
-        <button @click="searchFilm() ; searchSerie()">search</button>
-        <!-- film -->
-        <div class="films" v-if="films.length!=0">
-            <h2>Film</h2>
-            <div v-for="film in films">
-                {{film.original_title}}
-                <img :src="film.flag" width="30" alt="">
-                {{film.vote_average}}
-            </div>
-        </div>
-        <!-- serie tv -->
-        <div class="serie" v-if="series.length!=0">
-            <h2>Serie TV</h2>
-            <div v-for="serie in series">
-                {{serie.original_name}}
-                <img :src="serie.flag" width="30" alt="">
-                {{serie.vote_average}}
+        <button @click="search()">search</button>
+
+        <div v-for="element in filmSerie">
+            <div :id="element.name">
+                <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
+                <div v-for="film in (element.movieList)">
+                    <span> {{film.original_title}}</span>
+                    <span> {{film.original_name}}</span>
+                    <img :src="film.flag" width="30" alt="">
+                    <span>{{film.vote_average}}</span>
+                </div>
             </div>
         </div>
     </div>
