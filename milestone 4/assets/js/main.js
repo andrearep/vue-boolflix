@@ -1,3 +1,6 @@
+function replaceSpaceWPlus(string) {
+    return string.replace(' ', '+')
+}
 /**
  * ritorna l'oggetto dat con una chiave flag contenente il link all'immagine della bandiera
  * @param {object} object  deve contenere un elemento original_language per poter essere valida
@@ -19,8 +22,13 @@ function addFlag(object) {
 }
 function addPathImg(object) {
     for (let i = 0; i < object.length; i++) {
-        object[i].pathImg = `https://image.tmdb.org/t/p/w342/${object[i].poster_path}`
+        if (object[i].poster_path != undefined) {
+            object[i].pathImg = `https://image.tmdb.org/t/p/w342/${object[i].poster_path}`
+        } else {
+            object[i].pathImg = "./assets/img/no_image_Netflix.png"
+        }
     }
+
     return object
 }
 
@@ -38,8 +46,10 @@ const app = new Vue({
 
     el: "#root",
     data: {
+        noFilm: false,
         searchSwitch: 0,
         filmSearch: null,
+        filmSearchPlus: null,
         filmSerie: [
             /* film */
             {
@@ -55,19 +65,21 @@ const app = new Vue({
             }
         ]
     },
-    methods: {
-        search: function search() {
-            this.filmSerie.forEach((element) => {
 
+    methods: {
+
+        search: function search() {
+            this.filmSearchPlus = replaceSpaceWPlus(this.filmSearch)
+            this.filmSerie.forEach((element) => {
                 axios
-                    .get(`${element.url}${this.filmSearch}`)
+                    .get(`${element.url}${this.filmSearchPlus}`)
                     .then(resp => {
 
                         element.movieList = (resp.data.results)
                         element.movieList = addFlag(element.movieList)
 
                         /* cambiamo le chiavi che non corrispondono e che ci servono */
-                        if (element.name == "Serie TV") {
+                        if (element.name == "Serie TV" && element.movieList > 0) {
                             element.movieList = transformKey(element.movieList, "name", "title")
                             element.movieList = transformKey(element.movieList, "original_name", "original_title")
                         }
@@ -77,8 +89,16 @@ const app = new Vue({
                     })
                     .catch(e => {
                         console.error(e);
+                        console.log(e)
                     })
             })
+
+            if (this.filmSerie[0].movieList.length == 0 && this.filmSerie[1].movieList.length == 0) {
+                this.noFilm = true;
+            } else {
+                this.noFilm = false
+            }
+
         },
 
         switchOn: function switchOn() {
@@ -88,9 +108,8 @@ const app = new Vue({
 
     mounted() {
         document.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
+            if (e.key !== '') {
                 this.search();
-
             }
         })
     }

@@ -45,19 +45,27 @@
             </div>
         </header>
 
+        <main>
+            <span v-if="noFilm" class="error">
+                "{{filmSearch}}" non è presente nei nostri server!!
+            </span>
+            <div>
 
-        <div v-for="element in filmSerie">
-            <div :id="element.name">
-                <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
-                <div v-for="film in (element.movieList)">
-                    <img :src="film.pathImg" alt="">
-                    <span> {{film.original_title}}</span>
-                    <span> {{film.original_name}}</span>
-                    <img :src="film.flag" width="30" alt="">
-                    <span>{{film.vote_average}}</span>
+
+                <div class="cards" v-for="element in filmSerie" :id="element.name">
+                    <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
+                    <div class="cards">
+                        <div class="card" v-for="film in (element.movieList)">
+                            <img :src="film.pathImg" alt="">
+                            <!--   <span> {{film.original_title}}</span>
+                        <span> {{film.original_name}}</span>
+                        <img :src="film.flag" width="30" alt="">
+                        <span>{{film.vote_average}}</span> -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
     <!-- axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
