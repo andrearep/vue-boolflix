@@ -32,6 +32,8 @@ function transformKey(object, oldName, newName) {
     }
 }
 
+
+
 const app = new Vue({
 
     el: "#root",
@@ -52,10 +54,10 @@ const app = new Vue({
             }
         ]
     },
-
     methods: {
         search: function search() {
             this.filmSerie.forEach((element) => {
+
                 axios
                     .get(`${element.url}${this.filmSearch}`)
                     .then(resp => {

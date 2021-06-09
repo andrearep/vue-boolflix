@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolfix</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="root">
+        <header>
+            <div class="left_menu">
+
+                <img class="logo" src="./assets/img/netflix_logo.png" alt="">
+                <ul>
+                    <li><button>Home</button></li>
+                    <li><button>Serie Tv</button></li>
+                    <li><button>Film</button></li>
+                    <li><button>Originali</button></li>
+                    <li><button>Aggiunti di recente</button></li>
+                    <li><button>La mia lista</button></li>
+                </ul>
+            </div>
+            <div class="right_menu">
+
+                <button class="search_btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <i class="fas fa-bell"></i>
+                <img class="user_img" src="./assets/img/user_img.png" alt="">
+                <i class="fas fa-sort-down"></i>
+
+
+                <!--   <input v-model="filmSearch" type="text" placeholder="Type a film name">
+                <button @click="search()">search</button> -->
+            </div>
+        </header>
+
+
+        <div v-for="element in filmSerie">
+            <div :id="element.name">
+                <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
+                <div v-for="film in (element.movieList)">
+                    <img :src="film.pathImg" alt="">
+                    <span> {{film.original_title}}</span>
+                    <span> {{film.original_name}}</span>
+                    <img :src="film.flag" width="30" alt="">
+                    <span>{{film.vote_average}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
