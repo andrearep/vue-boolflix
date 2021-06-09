@@ -30,16 +30,18 @@
             </div>
             <div class="right_menu">
 
-                <button class="search_btn">
+                <button class="search_btn" v-if="!searchSwitch" @click="switchOn">
                     <i class="fas fa-search"></i>
                 </button>
+                <input class="search_bar" v-if="searchSwitch" v-model="filmSearch" type="text"
+                    placeholder="Type a film name">
+
                 <i class="fas fa-bell"></i>
                 <img class="user_img" src="./assets/img/user_img.png" alt="">
                 <i class="fas fa-sort-down"></i>
 
 
-                <!--   <input v-model="filmSearch" type="text" placeholder="Type a film name">
-                <button @click="search()">search</button> -->
+
             </div>
         </header>
 

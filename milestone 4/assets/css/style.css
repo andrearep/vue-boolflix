@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+*:focus {
+    outline: none;
+  }
 
 body{
     background-color: #1B1B1B;
@@ -14,6 +17,7 @@ header{
     justify-content: space-between;
     width: 100%;
 }
+/* LEFT MENU' */
 .left_menu{
     display: flex;
     align-items: center;
@@ -35,6 +39,7 @@ ul>li>button {
     margin-right: 1rem;
 }
 
+/* RIGHT MENU' */
 .right_menu{
     display: flex;
     align-items: center;
@@ -45,6 +50,11 @@ ul>li>button {
 	outline: inherit;
    
 }
+.search_bar{
+    border-radius: 0.5rem;
+    padding:0.2rem 1rem;
+    font-size: 1.1rem;
+}
 .right_menu, .search_btn{
   color: #F0F5F5;
   font-size: 1.3rem;
@@ -53,7 +63,7 @@ ul>li>button {
     margin-right: 1.2rem;
 }
 .right_menu>img{
-    width: 30px;
+    width: 40px;
     margin-right: 0.5rem;
 }
 .fa-sort-down{

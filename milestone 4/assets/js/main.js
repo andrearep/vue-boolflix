@@ -38,6 +38,7 @@ const app = new Vue({
 
     el: "#root",
     data: {
+        searchSwitch: 0,
         filmSearch: null,
         filmSerie: [
             /* film */
@@ -78,6 +79,10 @@ const app = new Vue({
                         console.error(e);
                     })
             })
+        },
+
+        switchOn: function switchOn() {
+            return this.searchSwitch = 1;
         }
     },
 
