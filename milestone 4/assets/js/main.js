@@ -83,12 +83,14 @@ const app = new Vue({
             /* film */
             {
                 name: "film",
+                queryType: "movie",
                 movieList: [],
                 url: "https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query="
             },
             /* serie tv */
             {
                 name: "Serie TV",
+                queryType: "tv",
                 movieList: [],
                 url: "https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query="
             }
@@ -118,10 +120,19 @@ const app = new Vue({
 
                         /* aggiungiamo le stelle di ratings */
                         element.movieList = addStars(element.movieList)
+
+
                     })
                     .catch(e => {
                         console.error(e);
                     })
+                    .finally(() => {
+
+                        this.searchCast(element.queryType, element.movieList)
+                        this.searchGenre(element.queryType, element.movieList)
+                    }
+
+                    )
             })
 
             if (this.filmSerie[0].movieList.length == 0 && this.filmSerie[1].movieList.length == 0) {
@@ -129,7 +140,39 @@ const app = new Vue({
             } else {
                 this.noFilm = false
             }
-        }
+        },
+
+        searchCast: function searchCast(type, movieArray) {
+            movieArray.forEach(movie => {
+                axios
+                    .get(`https://api.themoviedb.org/3/genre/${type}/list?api_key=e99307154c6dfb0b4750f6603256716d`)
+                    .then(resp => {
+
+                        this.$set(movie, "genre_name", [])
+                        const genreArray = resp.data.genres
+
+
+                        genreArray.forEach(genre => {
+                            if (movie.genre_ids.includes(genre.id)) {
+                                movie.genre_name.push(genre.name)
+                            }
+                        })
+                    })
+            })
+        },
+
+        searchGenre: function searchGenre(type, movieArray) {
+            movieArray.forEach(movie => {
+                axios
+                    .get(`https://api.themoviedb.org/3/${type}/${movie.id}/credits?api_key=e99307154c6dfb0b4750f6603256716d`)
+                    .then(resp => {
+                        this.$set(movie, "cast", []);
+                        for (let i = 0; i < 5; i++) {
+                            movie.cast.push(resp.data.cast[i].name)
+                        }
+                    })
+            })
+        },
     },
 
     mounted() {
