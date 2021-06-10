@@ -80,8 +80,8 @@
                             <!-- descrizione -->
                             <span> Descrizione: <br> </span>
                             <div class="overview">
-                                <span>
-                                    {{film.overview}}
+                                <span v-if="">
+                                    {{film.overview ? film.overview : "No descrizione"}}
                                 </span>
                             </div>
 
