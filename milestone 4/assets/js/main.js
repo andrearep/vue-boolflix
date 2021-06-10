@@ -36,8 +36,38 @@ function transformKey(object, oldName, newName) {
     for (let i = 0; i < object.length; i++) {
         object[i][newName] = object[i][oldName];
         delete object[i][oldName];
-        return object
+
     }
+    return object
+}
+
+function starsRating(number) {
+    let array = [];
+    let starsLeft = 5;
+    let fullStars = parseInt(number / 2);
+    let halfStar = parseInt(number % 2)
+
+
+    for (let i = 0; i < starsLeft; i++) {
+        if (fullStars > 0) {
+            array.push(`fas fa-star`)
+            fullStars--;
+        } else if (halfStar > 0) {
+            array.push(`fas fa-star-half-alt`)
+            halfStar--
+        } else {
+            array.push(`far fa-star`)
+        }
+    }
+    return array;
+}
+
+
+function addStars(object) {
+    for (let i = 0; i < object.length; i++) {
+        object[i].stars = starsRating(object[i].vote_average)
+    }
+    return object;
 }
 
 const app = new Vue({
@@ -76,15 +106,18 @@ const app = new Vue({
 
                         element.movieList = (resp.data.results)
                         element.movieList = addFlag(element.movieList)
-
+                        console.log(element.name);
                         /* cambiamo le chiavi che non corrispondono e che ci servono */
-                        if (element.name == "Serie TV" && element.movieList > 0) {
+                        if (element.name == "Serie TV" && element.movieList.length > 0) {
+
                             element.movieList = transformKey(element.movieList, "name", "title")
                             element.movieList = transformKey(element.movieList, "original_name", "original_title")
                         }
                         /* aggiunta elemento pathImg */
                         element.movieList = addPathImg(element.movieList)
-                        console.log(element.movieList);
+
+                        /* aggiungiamo le stelle di ratings */
+                        element.movieList = addStars(element.movieList)
                     })
                     .catch(e => {
                         console.error(e);
@@ -114,3 +147,6 @@ const app = new Vue({
 
     }
 })
+
+
+
