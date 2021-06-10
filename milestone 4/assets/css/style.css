@@ -127,8 +127,8 @@ h2{
 .card >img:hover{
     opacity: 0;
 }
-.retro >*{
-    padding-bottom: 0.5rem;
+.retro  *{
+    margin-bottom: 0.5rem;
 }
 .title{
     text-align: center;

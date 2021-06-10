@@ -168,7 +168,11 @@ const app = new Vue({
                     .then(resp => {
                         this.$set(movie, "cast", []);
                         for (let i = 0; i < 5; i++) {
-                            movie.cast.push(resp.data.cast[i].name)
+                            if (resp.data.cast[i].name) {
+                                movie.cast.push(resp.data.cast[i].name)
+                            } else {
+                                i = 5;
+                            }
                         }
                     })
             })

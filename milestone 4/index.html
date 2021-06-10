@@ -85,6 +85,18 @@
                                 </span>
                             </div>
 
+                            <!-- cast -->
+                            <div class="cast">
+                                <span>cast: <br></span>
+                                <span v-for="actor in film.cast"> |{{actor}}| </span>
+                            </div>
+
+                            <!-- genres -->
+                            <div class="genres">
+                                <span v-for="genre in film.genre_name">
+                                    {{genre}}, </span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
