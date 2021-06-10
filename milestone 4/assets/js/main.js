@@ -75,7 +75,7 @@ const app = new Vue({
     el: "#root",
     data: {
         noFilm: false,
-        searchSwitch: 0,
+        searchSwitch: false,
         filmSearch: null,
         filmSearchPlus: null,
         stars: [],

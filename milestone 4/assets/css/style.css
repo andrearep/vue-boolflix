@@ -54,6 +54,10 @@ ul>li>button {
     border-radius: 0.5rem;
     padding:0.2rem 1rem;
     font-size: 1.1rem;
+    
+}
+.search_bar:focus{
+    border: 3px solid rgb(184, 29, 29);
 }
 .right_menu, .search_btn{
   color: #F0F5F5;
