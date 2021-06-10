@@ -105,11 +105,13 @@ const app = new Vue({
                     .then(resp => {
 
                         element.movieList = (resp.data.results)
+
+                        /* aggiungiamo la chiave flag con la bandiera corrispondente alla lingua originale */
                         element.movieList = addFlag(element.movieList)
-                        console.log(element.name);
+
+
                         /* cambiamo le chiavi che non corrispondono e che ci servono */
                         if (element.name == "Serie TV" && element.movieList.length > 0) {
-
                             element.movieList = transformKey(element.movieList, "name", "title")
                             element.movieList = transformKey(element.movieList, "original_name", "original_title")
                         }
@@ -121,7 +123,6 @@ const app = new Vue({
                     })
                     .catch(e => {
                         console.error(e);
-                        console.log(e)
                     })
             })
 

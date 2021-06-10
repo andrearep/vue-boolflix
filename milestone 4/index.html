@@ -15,6 +15,9 @@
 
 <body>
     <div id="root">
+        <!-- **********
+            NAVBAR
+         ***********-->
         <header>
             <div class="left_menu">
 
@@ -39,49 +42,53 @@
                 <i class="fas fa-bell"></i>
                 <img class="user_img" src="./assets/img/user_img.png" alt="">
                 <i class="fas fa-sort-down"></i>
-
-
-
             </div>
         </header>
 
+        <!-- ********
+            MAIN
+         *********-->
         <main>
             <span v-if="noFilm" class="error">
                 "{{filmSearch}}" non è presente nei nostri server!!
             </span>
-            <div>
+            <div class="cards" v-for="element in filmSerie" :id="element.name">
+                <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
+                <div class="cards">
+                    <div class="card" v-for="film in (element.movieList)">
 
+                        <img :src="film.pathImg" alt="">
+                        <div class=retro>
+                            <span class="title">{{film.original_title}}</span>
 
-                <div class="cards" v-for="element in filmSerie" :id="element.name">
-                    <h2 v-if="element.movieList.length > 0">{{element.name}}</h2>
-                    <div class="cards">
-                        <div class="card" v-for="film in (element.movieList)">
-
-                            <img :src="film.pathImg" alt="">
-                            <div class=retro>
-                                <span class="title">{{film.original_title}}</span>
-                                <div>
-                                    <span>Lingua originale</span>
-                                    <img :src="film.flag" width="30" alt="">
-                                </div>
-                                <span class="valutazione"> Valutazione Media: <strong>{{film.vote_average}}</strong> su
-                                    <strong>{{film.vote_count}}</strong>
-                                    voti</span>
-                                <!-- stelle valutazione -->
-                                <div class="stars">
-                                    <i v-for="star in film.stars" :class=" star"></i>
-                                </div>
-
-                                <div class="overview">
-                                    <span>
-                                        Descrizione: <br> {{film.overview}}
-                                    </span>
-                                </div>
-
+                            <!-- lingua originale -->
+                            <div>
+                                <span>Lingua originale</span>
+                                <img :src="film.flag" width="30" alt="">
                             </div>
+
+                            <!-- valutazione media -->
+                            <span class="valutazione"> Valutazione Media: <strong>{{film.vote_average}}</strong> su
+                                <strong>{{film.vote_count}}</strong>
+                                voti</span>
+
+                            <!-- stelle valutazione -->
+                            <div class="stars">
+                                <i v-for="star in film.stars" :class=" star"></i>
+                            </div>
+
+                            <!-- descrizione -->
+                            <span> Descrizione: <br> </span>
+                            <div class="overview">
+                                <span>
+                                    {{film.overview}}
+                                </span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
     </div>
     <!-- axios -->
