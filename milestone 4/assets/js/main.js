@@ -103,12 +103,10 @@ const app = new Vue({
                 axios
                     .get(`${element.url}${this.filmSearchPlus}`)
                     .then(resp => {
-
                         element.movieList = (resp.data.results)
 
                         /* aggiungiamo la chiave flag con la bandiera corrispondente alla lingua originale */
                         element.movieList = addFlag(element.movieList)
-
 
                         /* cambiamo le chiavi che non corrispondono e che ci servono */
                         if (element.name == "Serie TV" && element.movieList.length > 0) {
@@ -131,10 +129,6 @@ const app = new Vue({
             } else {
                 this.noFilm = false
             }
-        },
-
-        switchOn: function switchOn() {
-            return this.searchSwitch = 1;
         }
     },
 
@@ -144,10 +138,5 @@ const app = new Vue({
                 this.search();
             }
         })
-
-
     }
 })
-
-
-
